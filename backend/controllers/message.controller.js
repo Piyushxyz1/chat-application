@@ -1,6 +1,7 @@
 
 import Conversation from "../models/conversation.model.js";
 import Message from "../models/message.model.js";
+import { getReceiverSocketId, io } from "../socket/socket.js";
 
 export const sendMessage = async(req,res)=>{
 
@@ -11,7 +12,7 @@ try {
     console.log(senderId)
 
     let conversation = await Conversation.findOne({
-    Participants:{$all:[senderId,recieverId]}
+    participants:{$all:[senderId,recieverId]}
 
     })
 
@@ -32,7 +33,16 @@ try {
 
     await Promise.all([conversation.save(),newMessage.save()])
 
-    res.status(201).json({message:newMessage})
+    // Socket io functionality - below
+
+    const receiverSocketId = getReceiverSocketId(recieverId);
+    if(receiverSocketId){
+
+      io.to(receiverSocketId).emit("newMessage",newMessage) // used to send to specific user
+    }
+
+
+    res.status(201).json(newMessage)
     
 } catch (error) {
     console.log("error in sendMessage controller",error)
