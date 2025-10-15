@@ -25,12 +25,15 @@ export const useSignup = () => {
                     body: JSON.stringify({ fullName, username, password, confirmPassword, gender })
                 });
 
+
+            if(!res.ok){
+            throw new Error(res.status)
+
+            }
+
             const data =  await res.json();
         
-             if(data.error){
-
-                throw new Error(data.error)
-             }
+          
 
              localStorage.setItem("auth-user",JSON.stringify(data))
 
