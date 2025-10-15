@@ -2,7 +2,6 @@
 import path from 'path';
 import dotenv from 'dotenv'
 import express  from'express'
-import cors from "cors";
 import authRoutes from './routes/auth.Routes.js';
 import messageRoutes from "./routes/message.Routes.js";
 import userRoutes from "./routes/user.Routes.js"
@@ -18,13 +17,6 @@ const PORT = process.env.PORT || 5000;
 
 app.use(express.json())
 app.use(cookieParser())
-
-import cors from "cors";
-app.use(cors({
-  origin: ["https://chat-application-7bbx.onrender.com"], // or "*" for testing
-  credentials: true
-}));
-
 
 
 
