@@ -27,9 +27,13 @@ try {
     if(data.error){
         throw new Error(data.error);
     }
+    else{
 
-    localStorage.setItem("auth-user",JSON.stringify(data))
-    setAuthUser(data)
+        localStorage.setItem("auth-user",JSON.stringify(data))
+        setAuthUser(data)
+
+    }
+
     
 } catch (error) {
     toast.error(error.message)
