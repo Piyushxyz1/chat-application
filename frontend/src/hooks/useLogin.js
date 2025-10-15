@@ -23,7 +23,7 @@ try {
     })
 
     if(!res.ok){
-        throw new Error(res.status && res.json());
+        throw new Error(res.status);
     }
     
     const data = await res.json()
