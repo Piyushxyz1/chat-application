@@ -22,18 +22,18 @@ try {
 
     })
 
-    const data =  await res.json()
-
-    if(data.error){
+    if(!res.ok){
         throw new Error(data.error);
     }
-    else{
+    
+    const data = await res.json()
+
+
 
         localStorage.setItem("auth-user",JSON.stringify(data))
         setAuthUser(data)
 
-    }
-
+  
     
 } catch (error) {
     toast.error(error.message)
