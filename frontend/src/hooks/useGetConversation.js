@@ -10,11 +10,12 @@ const [conversations,setConversations] = useState([]);
 
 
 
+
 useEffect(()=>{
     const getConversation = async()=>{
         setLoading(true);
     try {
-    const res = await fetch("api/users")
+    const res = await fetch(`https://chat-application-7bbx.onrender.com/api/users`)
     const data = await res.json();
     if(data.error) throw new Error(data.error)
 
